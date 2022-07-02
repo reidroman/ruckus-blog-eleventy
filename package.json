@@ -6,13 +6,14 @@
     "build": "lerna run build --parallel",
     "dev": "lerna run dev --parallel",
     "format": "lerna run format",
-    "build-studio": "lerna bootstrap && cd studio && npm run build",
-    "build-web": "lerna bootstrap && cd web && npm run build",
+    "build-studio": "lerna bootstrap && cd studio && yarn build",
+    "build-web": "lerna bootstrap && cd web && yarn build",
     "lint": "lerna run lint",
     "postinstall": "lerna bootstrap",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "lerna": "^3.16.4"
+    "lerna": "^5.1.6",
+    "netlify-cli": "^10.7.1"
   }
 }
