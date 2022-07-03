@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -72,3 +73,11 @@ yarn.lock
 
 # Static site
 _site
+
+# Local Netlify folder
+.netlify
+
+
+js/min.js
+js/min.js.map
+export

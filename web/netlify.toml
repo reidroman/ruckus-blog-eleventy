@@ -1,6 +1,6 @@
 [build]
-  command = "yarn build"
   publish = "_site"
+  command = "[ \"$METADATA_JSON\" ] && echo $METADATA_JSON > _data/metadata.json; yarn build"
   functions = "functions"
   NODE_ENV = "10.15.3"
 
@@ -11,3 +11,11 @@
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
+
+[[headers]]
+  for = "*.avif"
+    [headers.values]
+      Content-Type = "image/avif"
+      Content-Disposition = "inline"
+
+
