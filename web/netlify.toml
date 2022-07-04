@@ -1,7 +1,7 @@
 [build]
   publish = "_site"
   command = "yarn build"
-  functions = "functions"
+  functions = "functions/cloud"
   NODE_ENV = "10.15.3"
 
 [dev]

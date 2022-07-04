@@ -190,18 +190,13 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.addCollection("tagList", require("./plugins/getTagList"));
   eleventyConfig.addPassthroughCopy("img");
-  eleventyConfig.addPassthroughCopy("css");
-  // We need to copy cached.js only if GA is used
-  eleventyConfig.addPassthroughCopy(GA_ID ? "js" : "js/*[!cached].*");
   eleventyConfig.addPassthroughCopy("fonts");
+  // styles and scripts are bundled by rollup into dist/
+  // We need to copy cached ga.js only if GA is used
+  eleventyConfig.addPassthroughCopy(GA_ID ? "dist" : "dist/*[!ga].*");
 
-  // We need to rebuild upon JS change to update the CSP.
-  eleventyConfig.addWatchTarget("./js/");
-  // We need to rebuild on CSS change to inline it.
-  eleventyConfig.addWatchTarget("./css/");
-  // Unfortunately this means .eleventyignore needs to be maintained redundantly.
-  // But without this the JS build artefacts doesn't trigger a build.
-  eleventyConfig.setUseGitIgnore(false);
+  // Rebuild on JS change to update the CSP, on CSS change to inline it.
+  eleventyConfig.addWatchTarget("./dist/");
 
   /* Markdown Overrides */
   let markdownLibrary = markdownIt({

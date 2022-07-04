@@ -78,6 +78,5 @@ _site
 .netlify
 
 
-js/min.js
-js/min.js.map
+dist
 export
