@@ -10,6 +10,12 @@ TODO:
 [] reconcile json metadata with sanity provisions
 [] ensure draft posting, scheduled releases, tags, images, code snippets enabled through sanity
 [] remove web/posts/posts.11tydata.js if so
-[] consider stuff from [here](https://github.com/surjithctly/neat-starter)
+[] reinstate tests ( "build": "yarn js-build && eleventy && yarn test", in package.json)
+[] [11ty plugin navigation](https://www.11ty.dev/docs/plugins/navigation/) vs native?
+[] [11ty plugin image](https://www.11ty.dev/docs/plugins/image/) vs third party
+
+Features for consideration
+[] [https://github.com/surjithctly/neat-starter](https://github.com/surjithctly/neat-starter)
   [] Alpine.js
   [] Tailwind.css
+[] [https://htmx.org/](https://htmx.org/)

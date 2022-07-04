@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "yarn js-build && eleventy && yarn test",
+    "build": "yarn js-build && eleventy",
     "dev": "concurrently 'yarn js-build-watch' 'eleventy --watch --serve'",
     "now-build": "yarn build",
     "js-build": "rollup -c rollup.config.js",
