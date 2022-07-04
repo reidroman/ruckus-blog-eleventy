@@ -58,7 +58,7 @@ const markdownItAnchor = require("markdown-it-anchor");
 const localImages = require("eleventy-plugin-local-images");
 const CleanCSS = require("clean-css");
 const UglifyJS = require("uglify-js");
-const GA_ID = require("./_data/metadata.json").googleAnalyticsId;
+const GA_ID = require("./data/metadata.json").googleAnalyticsId;
 const { cspDevMiddleware } = require("./plugins/apply-csp.js");
 
 module.exports = function (eleventyConfig) {
@@ -278,9 +278,8 @@ module.exports = function (eleventyConfig) {
 
     // These are all optional, defaults are shown:
     dir: {
-      input: ".",
-      includes: "_includes",
-      data: "_data",
+      input: "templates",
+      data: "../data",
       // Warning hardcoded throughout repo. Find and replace is your friend :)
       output: "_site",
     },
