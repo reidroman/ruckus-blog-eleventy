@@ -17,9 +17,14 @@ templateClass: tmpl-post
 {% set shareUrl = metadata.url + page.url %}
 
 {% block article %}
-{{ content | safe }}
+<article>
+  <h1>{{ post.title }}</h1>
+  <p>Written by {% for author in post.authors %}{{author.name}}{% endfor %}</p>
+  {{ post.body | markdownify | safe }}
+  <p><a href="{{ '/' | url }}">← Home</a></p>
+</article>
 
-<h1>🙏🙏🙏</h1>
+<h3>🙏🙏🙏</h3>
 <p>
   Since you've made it this far, <a href="{{ shareUrl | safe }}" on-click="share">sharing</a> this article on your favorite social media network
   would be highly appreciated 💖! For feedback, please

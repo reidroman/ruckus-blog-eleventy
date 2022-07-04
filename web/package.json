@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "yarn js-build && eleventy && yarn test",
-    "dev": "eleventy --watch --serve",
+    "dev": "concurrently 'yarn js-build-watch' 'eleventy --watch --serve'",
     "now-build": "yarn build",
     "js-build": "rollup -c rollup.config.js",
     "js-build-watch": "rollup -c rollup.config.js -w",
     "debug": "DEBUG=* eleventy && npm run test",
     "test": "mocha test/test*.js",
     "test-watch": "mocha test/test*.js --watch --watch-files=test/*",
+    "clean": "rm -Rf ./_site/posts/*",
     "kill-11ty": "kill $(ps -e | grep .bin/eleventy | awk '{print $1}')"
   },
   "keywords": [],
@@ -30,6 +31,7 @@
     "file-type": "^17.1.2",
     "fs-extra": "^10.1.0",
     "groq": "^2.29.3",
+    "jimp": "^0.16.1",
     "jsdom": "^20.0.0",
     "luxon": "^2.4.0",
     "markdown-it": "^13.0.1",

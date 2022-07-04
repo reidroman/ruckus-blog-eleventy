@@ -55,11 +55,12 @@ const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
-const localImages = require("./third_party/eleventy-plugin-local-images/.eleventy.js");
+// const localImages = require("./third_party/eleventy-plugin-local-images/.eleventy.js");
+const localImages = require("eleventy-plugin-local-images");
 const CleanCSS = require("clean-css");
 const UglifyJS = require("uglify-js");
 const GA_ID = require("./_data/metadata.json").googleAnalyticsId;
-const { cspDevMiddleware } = require("./_11ty/apply-csp.js");
+const { cspDevMiddleware } = require("./plugins/apply-csp.js");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
@@ -74,10 +75,10 @@ module.exports = function (eleventyConfig) {
     verbose: false,
   });
 
-  eleventyConfig.addPlugin(require("./_11ty/img-dim.js"));
-  eleventyConfig.addPlugin(require("./_11ty/json-ld.js"));
-  eleventyConfig.addPlugin(require("./_11ty/optimize-html.js"));
-  eleventyConfig.addPlugin(require("./_11ty/apply-csp.js"));
+  eleventyConfig.addPlugin(require("./plugins/img-dim.js"));
+  eleventyConfig.addPlugin(require("./plugins/json-ld.js"));
+  eleventyConfig.addPlugin(require("./plugins/optimize-html.js"));
+  eleventyConfig.addPlugin(require("./plugins/apply-csp.js"));
   eleventyConfig.setDataDeepMerge(true);
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
   eleventyConfig.addNunjucksAsyncFilter(
@@ -157,19 +158,19 @@ module.exports = function (eleventyConfig) {
     return minified.code;
   });
 
-  eleventyConfig.addFilter("readableDate", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat(
+  eleventyConfig.addFilter("readableDate", (dateString) => {
+    return DateTime.fromISO(dateString, { zone: "utc" }).toFormat(
       "dd LLL yyyy"
     );
   });
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
-  eleventyConfig.addFilter("htmlDateString", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("yyyy-LL-dd");
+  eleventyConfig.addFilter("htmlDateString", (dateString) => {
+    return DateTime.fromISO(dateString, { zone: "utc" }).toFormat("yyyy-LL-dd");
   });
 
-  eleventyConfig.addFilter("sitemapDateTimeString", (dateObj) => {
-    const dt = DateTime.fromJSDate(dateObj, { zone: "utc" });
+  eleventyConfig.addFilter("sitemapDateTimeString", (dateString) => {
+    const dt = DateTime.fromISO(dateString, { zone: "utc" });
     if (!dt.isValid) {
       return "";
     }
@@ -188,7 +189,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("posts", function (collectionApi) {
     return collectionApi.getFilteredByTag("posts");
   });
-  eleventyConfig.addCollection("tagList", require("./_11ty/getTagList"));
+  eleventyConfig.addCollection("tagList", require("./plugins/getTagList"));
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
   // We need to copy cached.js only if GA is used
@@ -215,7 +216,8 @@ module.exports = function (eleventyConfig) {
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
   eleventyConfig.addFilter("markdownify", function(value) {
-    const md = new markdownIt(options)
+    // const md = new markdownIt(options)
+    const md = markdownLibrary;
     return md.render(value)
   })
 

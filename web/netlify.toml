@@ -1,6 +1,6 @@
 [build]
   publish = "_site"
-  command = "[ \"$METADATA_JSON\" ] && echo $METADATA_JSON > _data/metadata.json; yarn build"
+  command = "yarn build"
   functions = "functions"
   NODE_ENV = "10.15.3"
 
