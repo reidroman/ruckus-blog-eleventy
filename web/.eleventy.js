@@ -185,8 +185,18 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n);
   });
 
-  eleventyConfig.addCollection("posts", function (collectionApi) {
-    return collectionApi.getFilteredByTag("posts");
+  // eleventyConfig.addCollection("posts", function (collectionApi) {
+  //   return collectionApi.getFilteredByTag("posts");
+  // });
+  eleventyConfig.addCollection("pinnedPosts", (collectionApi) => {
+    return collectionApi
+    .getFilteredByTag("postPages")
+    .filter(post => post.data.post.isPinned);
+  });
+  eleventyConfig.addCollection("unpinnedPosts", (collectionApi) => {
+    return collectionApi
+    .getFilteredByTag("postPages")
+    .filter(post => !post.data.post.isPinned);
   });
   eleventyConfig.addCollection("tagList", require("./plugins/getTagList"));
   eleventyConfig.addPassthroughCopy("img");

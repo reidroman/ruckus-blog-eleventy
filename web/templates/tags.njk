@@ -16,7 +16,7 @@ eleventyComputed:
 permalink: /tags/{{ tag | slugify }}/
 ---
 
-{% set postslist = collections[ tag ] %}
-{% include "postslist.njk" %}
+{% set postsList = collections[ tag ] %}
+{% include "components/posts-list.njk" %}
 
 <p>See <a href="{{ '/tags/' | url }}">all tags</a>.</p>

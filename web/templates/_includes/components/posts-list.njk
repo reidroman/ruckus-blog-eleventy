@@ -1,6 +1,6 @@
 {# TODO: review classes, remove inline styles? #}
-<ol reversed class="postlist" style="counter-reset: start-from {{ postslist.length + 1 }}">
-{% for post in postslist | reverse %}
+<ol reversed class="postlist" style="counter-reset: start-from {{ postsList.length + 1 }}">
+{% for post in postsList | reverse %}
   {% set currentPost = post.data.post %}
   <li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
     <a href="{{ post.url | url }}" class="postlist-link">{% if currentPost.title %}{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>

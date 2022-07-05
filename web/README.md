@@ -3,13 +3,16 @@
 A lot of code and inspiration drawn from these templates:
 https://github.com/sanity-io/sanity-template-eleventy-blog
 https://github.com/philhawksworth/eleventyone
+https://github.com/philhawksworth/eleventail
 https://github.com/google/eleventy-high-performance-blog
 https://github.com/reeseschultz/11r
 Check their readmes for issues or config details
 
 TODO:
 [] reconcile json metadata with sanity provisions
+[] pull `mainImage` from sanity
 [] ensure draft posting, scheduled releases, tags, images, code snippets, code copying enabled through sanity
+[] ensure 11ty using sanity's preview, orderings, list fetches
 [] ensure RSS feed is working
 [] remove web/posts/posts.11tydata.js if so
 [] reinstate tests ( "build": "yarn js-build && eleventy && yarn test", in package.json)
@@ -29,6 +32,7 @@ TODO:
 [] remove either `scripts/ga.js` or `data/googleanalytics.js`, or figure this out
 [] check on `_headers`
 [] get a11y check, specifically for max contrast
+[] fix [tailwind imports](https://tailwindcss.com/docs/using-with-preprocessors)
 
 Features for consideration
 [] [https://github.com/surjithctly/neat-starter](https://github.com/surjithctly/neat-starter)
@@ -36,8 +40,11 @@ Features for consideration
 [] [https://github.com/reeseschultz/11r](https://github.com/reeseschultz/11r)
 [] [https://github.com/signalkuppe/eleventy-react](https://github.com/signalkuppe/eleventy-react)
 [] [https://htmx.org/](https://htmx.org/)
+[] [https://mdxjs.com/](https://mdxjs.com/)
+[] is Svelte better than Alpine? probably worth a try
 [] [other plugins](https://www.11ty.dev/docs/plugins/)
 [] dark mode/light mode (ideally match system theme) [tutorial](https://jec.fyi/blog/supporting-dark-mode)
+  [] maybe [theme ui](https://github.com/deckchairlabs/eleventy-plugin-theme-ui) can help
 [] automated responsiveness test?
 [] send to Kindle? PDF version?
 [] search posts
@@ -45,6 +52,8 @@ Features for consideration
 [] [https://hacks.mozilla.org/2020/10/to-eleventy-and-beyond/](https://hacks.mozilla.org/2020/10/to-eleventy-and-beyond/)
   [] Browsersync
   [] cache-busting strategies
+[] Enable [Tweet embeds in markdown](https://orbit.love/blog/how-to-add-twitter-and-instagram-embeds-on-an-eleventy-website-using-sanity)
+
 
 design vision:
 - no images?
@@ -58,3 +67,8 @@ design vision:
 - big, bold slogan
 - lots of horizontal rules
 - accent on hover? probably accent always
+
+eleventy templates and starters:
+- https://www.11ty.dev/docs/starter/
+- https://jamstackthemes.dev/ssg/eleventy/
+- https://www.easeout.co/blog/2021-01-28-50-best-eleventy-starter-themes-2021/

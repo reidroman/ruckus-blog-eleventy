@@ -12,12 +12,14 @@ function generatePost (post) {
   }
 }
 
-async function getPosts () {
+const getPosts = async () => {
   // Learn more: https://www.sanity.io/docs/data-store/how-queries-work
   const filter = groq`*[_type == "post" && defined(slug) && publishedAt < now()]`
   const projection = groq`{
     _id,
     publishedAt,
+    isPinned,
+    isBig,
     title,
     slug,
     body[]{
@@ -33,9 +35,11 @@ async function getPosts () {
       }
     },
     "authors": authors[].author->
-  }`
+  }`;
+  // TODO: this may not be taking advantage of Sanity's order cache
   const order = `| order(publishedAt asc)`
   const query = [filter, projection, order].join(' ')
+  // TODO: can we abstract out calls to the client? make this declarative
   const docs = await client.fetch(query).catch(err => console.error(err))
   const reducedDocs = overlayDrafts(hasToken, docs)
   const preparePosts = reducedDocs.map(generatePost)
