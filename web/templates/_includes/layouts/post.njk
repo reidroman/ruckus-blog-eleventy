@@ -4,9 +4,10 @@ templateClass: tmpl-post
 ---
 {% extends "layouts/base.njk" %}
 
-
 {# TODO: consider adding functionality for multiple authors #}
-{% block extraArticleHeader %}
+{% block header %}
+    <h1>{{ title }}</h1>
+    <h2>{{ subtitle }}</h2>
    {% set wc = content | striptags | wordcount %}
    {% set wPerMinute = (wc / 240) + 1 %}
    <aside>

@@ -76,8 +76,8 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPlugin(require("./plugins/img-dim.js"));
   eleventyConfig.addPlugin(require("./plugins/json-ld.js"));
-  eleventyConfig.addPlugin(require("./plugins/optimize-html.js"));
-  eleventyConfig.addPlugin(require("./plugins/apply-csp.js"));
+  // eleventyConfig.addPlugin(require("./plugins/optimize-html.js"));
+  // eleventyConfig.addPlugin(require("./plugins/apply-csp.js"));
   eleventyConfig.setDataDeepMerge(true);
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
   eleventyConfig.addNunjucksAsyncFilter(
@@ -185,9 +185,6 @@ module.exports = function (eleventyConfig) {
     return array.slice(0, n);
   });
 
-  // eleventyConfig.addCollection("posts", function (collectionApi) {
-  //   return collectionApi.getFilteredByTag("posts");
-  // });
   eleventyConfig.addCollection("pinnedPosts", (collectionApi) => {
     return collectionApi
     .getFilteredByTag("postPages")
@@ -199,12 +196,16 @@ module.exports = function (eleventyConfig) {
     .filter(post => !post.data.post.isPinned);
   });
   eleventyConfig.addCollection("tagList", require("./plugins/getTagList"));
+  eleventyConfig.addPassthroughCopy({
+    "./node_modules/alpinejs/dist/cdn.min.js": "dist/alpine.js",
+  });
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("fonts");
   // styles and scripts are bundled by rollup into dist/
   // We need to copy cached ga.js only if GA is used
   eleventyConfig.addPassthroughCopy(GA_ID ? "dist" : "dist/*[!ga].*");
 
+  eleventyConfig.setUseGitIgnore(false);
   // Rebuild on JS change to update the CSP, on CSS change to inline it.
   eleventyConfig.addWatchTarget("./dist/");
 

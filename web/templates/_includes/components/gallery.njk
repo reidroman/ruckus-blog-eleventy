@@ -2,7 +2,18 @@
 {% for post in postsList | reverse %}
   {% set currentPost = post.data.post %}
   <div class="{{ "row-span-2" if currentPost.isBig }}">
-    <a href="{{ post.url | url }}" class="block h-full w-full">{% if currentPost.title %}{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+    <a href="{{ post.url | url }}" class="block no-underline">
+      {% if currentPost.title %}
+        <h2 class="m-0">{{ currentPost.title }}</h2>
+        {% if currentPost.subtitle %}
+        <h3>{{ currentPost.subtitle }}</h3>
+        {% else %}
+        <p>{{ currentPost.excerpt }}</p>
+        {% endif %}
+      {% else %}
+        <code>{{ post.url }}</code>
+      {% endif %}
+    </a>
   </div>
 {% endfor %}
 </div>

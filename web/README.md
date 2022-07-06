@@ -46,7 +46,11 @@ Features for consideration
 [] dark mode/light mode (ideally match system theme) [tutorial](https://jec.fyi/blog/supporting-dark-mode)
   [] maybe [theme ui](https://github.com/deckchairlabs/eleventy-plugin-theme-ui) can help
 [] automated responsiveness test?
-[] send to Kindle? PDF version?
+[] play button with various options
+  [] send to Kindle
+  [] PDF version
+  [] Audm or read aloud
+[] mobile mousedown for link previews?
 [] search posts
 [] pagination? probably not
 [] [https://hacks.mozilla.org/2020/10/to-eleventy-and-beyond/](https://hacks.mozilla.org/2020/10/to-eleventy-and-beyond/)

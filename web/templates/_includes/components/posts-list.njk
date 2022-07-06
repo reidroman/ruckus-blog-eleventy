@@ -1,10 +1,17 @@
 {# TODO: review classes, remove inline styles? #}
-<ol reversed class="postlist" style="counter-reset: start-from {{ postsList.length + 1 }}">
+{% if postsList.length %}
+<ol reversed class="list-none p-0">
 {% for post in postsList | reverse %}
   {% set currentPost = post.data.post %}
-  <li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
-    <a href="{{ post.url | url }}" class="postlist-link">{% if currentPost.title %}{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
-    <time class="postlist-date" datetime="{{ currentPost.publishedAt }}">{{ currentPost.publishedAt | readableDate }}</time>
+  <li class="p-0">
+    <a href="{{ post.url | url }}" class="block no-underline">
+    {% if currentPost.title %}{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}
+      <time datetime="{{ currentPost.publishedAt }}">{{ currentPost.publishedAt | readableDate }}</time>
+    </a>
   </li>
 {% endfor %}
 </ol>
+{% else %}
+<p>More posts coming soon.</p>
+<p>Subscribe for the latest.</p>
+{% endif %}

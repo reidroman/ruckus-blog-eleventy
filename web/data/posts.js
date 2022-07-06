@@ -21,6 +21,7 @@ const getPosts = async () => {
     isPinned,
     isBig,
     title,
+    subtitle,
     slug,
     body[]{
       ...,

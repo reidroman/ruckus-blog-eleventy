@@ -1,8 +1,12 @@
 /* purgecss start ignore */
+/*
 @import 'tailwindcss/base';
-/* purgecss end ignore */
-
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+*/
 
-@import './high_performance_blog.css';
+
+/* @import './high_performance_blog.css'; */
+
+@import './mine.css';
+/* purgecss end ignore */

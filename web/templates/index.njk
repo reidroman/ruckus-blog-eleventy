@@ -12,17 +12,18 @@ date: Last Modified
 {# TODO: check whether date works #}
 
 <div id="posts">
-  <h1>Pinned Posts</h1>
+  <div class="mb-4">
+    <h1 class="border-b">Pinned Posts</h1>
 
-  {% set postsList = collections.pinnedPosts %}
-  {% include "components/gallery.njk" %}
+    {% set postsList = collections.pinnedPosts %}
+    {% include "components/gallery.njk" %}
+  </div>
 
-  <h1>All Posts</h1>
+  <div class="mb-4">
+    <h1 class="border-b">All Posts</h1>
 
-  {% set postsList = collections.unpinnedPosts %}
-  {% include "components/posts-list.njk" %}
-
+    {% set postsList = collections.unpinnedPosts %}
+    {% include "components/posts-list.njk" %}
+  </div>
 
 </div>
-
-<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>

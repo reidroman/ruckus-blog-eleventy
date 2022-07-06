@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Inter";
+    font-weight: 100 900;
+    font-style: oblique 0deg 10deg;
+    src: url("/fonts/Inter-3.19.var.woff2") format("woff2");
+  }
+  /* @font-face {
+    font-family: "Roboto Serif", serif;
+    font-weight: 600;
+    src: url("/fonts/RobotoSerif-VariableFont_GRAD,opsz,wdth,wght.ttf");
+  } */
+  @font-face {
+    font-family: 'Roboto Serif';
+    /* font-style: normal; */
+    font-weight: 600;
+    src: url('/fonts/roboto-serif-v7-latin-600.woff2') format('woff2'),
+         url('/fonts/roboto-serif-v7-latin-600.woff') format('woff');
+  }
+}
