@@ -215,12 +215,12 @@ module.exports = function (eleventyConfig) {
     breaks: true,
     linkify: true,
   }).use(markdownItAnchor, {
-    permalink: true,
-    permalinkClass: "direct-link",
-    permalinkSymbol: "#",
+    permalink: markdownItAnchor.permalink.headerLink({
+      class: "scroll-m-8",
+    }),
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
-  eleventyConfig.addFilter("markdownify", function(value) {
+  eleventyConfig.addFilter("markdownify", (value) => {
     // const md = new markdownIt(options)
     const md = markdownLibrary;
     return md.render(value)
