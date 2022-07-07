@@ -1,0 +1,13 @@
+{# {% set inputData = { name: "email", label: "Email", placeholder: "crypto@curious.co" } %} #}
+<div class="flex gap-2 mt-4">
+  <div class="basis-40 text-right">
+    <label for="{{inputData.name}}" class="align-baseline text-sm font-medium text-gray-700">{{inputData.label}}</label>
+  </div>
+  <input
+    x-model="{{inputData.name}}"
+    type="text"
+    name="{{inputData.name}}"
+    id="{{inputData.name}}"
+    class="focus:ring-indigo-500 focus:border-indigo-500 block flex-1 sm:text-sm border-gray-300 rounded-sm"
+    placeholder="{{inputData.placeholder if inputData.placeholder else inputData.label}}">
+</div>
