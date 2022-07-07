@@ -4,4 +4,6 @@ eleventyExcludeFromCollections: true
 ---
 # Content not found.
 
-Go <a href="{{ '/' | url }}">home</a>.
+Couldn't find that. Could be us.
+
+Go <a href="{{ '/' | url }}">home</a>?
