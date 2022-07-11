@@ -24,7 +24,7 @@ module.exports = {
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
-      serif: ["Roboto Serif", "serif"],
+      serif: ['"Roboto Serif"', "serif"],
       // mono: ['ui-monospace', 'SFMono-Regular'],
     },
     extend: {
@@ -32,9 +32,8 @@ module.exports = {
         DEFAULT: {
           css: {
             maxWidth: "none",
-            fontFamily: "Inter, sans-serif",
             "h1, h2, h3, h4, h5, h6": {
-              "font-family": "Roboto Serif, serif",
+              "font-family": '"Roboto Serif", serif',
             },
           },
         },

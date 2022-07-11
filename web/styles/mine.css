@@ -22,3 +22,5 @@
          url('/fonts/roboto-serif-v7-latin-600.woff') format('woff');
   }
 }
+
+[x-cloak] { display: none !important; }

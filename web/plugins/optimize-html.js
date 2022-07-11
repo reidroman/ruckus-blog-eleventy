@@ -31,7 +31,6 @@ const csso = require("csso");
 
 /**
  * Inlines the CSS.
- * Makes font display display-optional
  * Minifies and optimizes the JS
  * Optimizes HTML
  * Optimizes AMP
@@ -48,11 +47,6 @@ const purifyCss = async (rawContent, outputPath) => {
     let before = require("fs").readFileSync("dist/bundle.css", {
       encoding: "utf-8",
     });
-
-    before = before.replace(
-      /@font-face {/g,
-      "@font-face {font-display:optional;"
-    );
 
     const purged = await new PurgeCSS().purge({
       content: [

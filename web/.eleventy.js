@@ -79,7 +79,7 @@ module.exports = function (eleventyConfig) {
   // });
 
   // eleventyConfig.addPlugin(require("./plugins/img-dim.js"));
-  // eleventyConfig.addPlugin(require("./plugins/optimize-html.js"));
+  eleventyConfig.addPlugin(require("./plugins/optimize-html.js"));
   // eleventyConfig.addPlugin(require("./plugins/apply-csp.js"));
   eleventyConfig.setDataDeepMerge(true);
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
@@ -206,10 +206,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("fonts");
   // styles and scripts are bundled by rollup into dist/
   eleventyConfig.addPassthroughCopy("dist");
-
-  eleventyConfig.setUseGitIgnore(false);
   // Rebuild on JS change to update the CSP, on CSS change to inline it.
   eleventyConfig.addWatchTarget("./dist/");
+  eleventyConfig.setUseGitIgnore(false);
 
   /* Markdown Overrides */
   let markdownLibrary = markdownIt({
