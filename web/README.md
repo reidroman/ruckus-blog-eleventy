@@ -77,6 +77,7 @@ Features for consideration
 - https://github.com/GoogleChrome/web-vitals
 - https://web.dev/vitals/
   [] setup sample web vitals report: https://github.com/GoogleChromeLabs/web-vitals-report
+[] maybe don't build on netlify? seems weird that I can't set NODE_ENV to production on production (because it's building with dev deps)
 
 
 design vision:
@@ -123,3 +124,7 @@ https://schema.org/ReviewAction
 https://schema.org/UseAction
 https://schema.org/AskAction
 https://schema.org/CommentAction
+
+why does css break sometimes? seems like it's after cached deploys
+css pipeline:
+css files -> js import -> rollup extraction -> postcss plugin -> optimizeHtml plugin -> dist

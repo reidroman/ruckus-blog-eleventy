@@ -2,7 +2,8 @@
   publish = "_site"
   command = "yarn build"
   functions = "functions"
-  NODE_ENV = "10.15.3"
+  # sync with .tool-versions
+  NODE_VERSION = "16.15.1"
 
 [dev]
   command = "yarn dev"

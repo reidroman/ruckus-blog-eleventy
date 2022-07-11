@@ -5,7 +5,7 @@ import svg from "rollup-plugin-svg";
 import { terser } from "rollup-plugin-terser";
 import path from "path";
 
-const DEV = process.env.NODE_ENV !== "production";
+const DEV = process.env.CONTEXT !== "production";
 
 // TODO: this is a goofy mechanism for conditional js include
 const replaceImports = {};

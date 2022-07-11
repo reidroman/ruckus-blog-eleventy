@@ -1,11 +1,12 @@
 // https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag
 // https://github.com/codeniko/simple-tracker/blob/master/examples/server-examples/aws-lambda/google-analytics.js
 // NB: no great Google reference code because this circumvents a lot of tracker blockers
+// could use the DNS alias trick
 const request = require("phin");
 
 const measurement_id = process.env.GOOGLE_ANALYTICS_ID;
 const api_secret = process.env.GOOGLE_ANALYTICS_MP_API_KEY;
-const DEV = process.env.NODE_ENV !== "production";
+const DEV = process.env.CONTEXT !== "production";
 const GA_URL = (DEV)
   ? `https://www.google-analytics.com/debug/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`
   : `https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`;
