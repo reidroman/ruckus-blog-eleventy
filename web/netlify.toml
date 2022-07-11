@@ -1,11 +1,16 @@
 [build]
   publish = "_site"
   command = "yarn build"
-  functions = "functions/cloud"
+  functions = "functions"
   NODE_ENV = "10.15.3"
 
 [dev]
   command = "yarn dev"
+
+[[redirects]]
+  from = "/api/ga/*"
+  to = "/.netlify/functions/ga"
+  status = 200
 
 [[redirects]]
   from = "/api/*"

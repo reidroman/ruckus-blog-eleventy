@@ -10,7 +10,7 @@ templateClass: tmpl-post
     <h2>{{ subtitle }}</h2>
 {% endblock %} #}
 
-{% set shareUrl = metadata.url + page.url %}
+{% set shareUrl = env.url + page.url %}
 
 {% block article %}
 <article>
@@ -21,6 +21,7 @@ templateClass: tmpl-post
    {% set wPerMinute = (wc / 240) + 1 %}
    <aside>
      {{ wPerMinute | round }} min read
+     {{ content | timeToRead }} min read
    </aside>
   {{ post.body | markdownify | safe }}
   <p><a href="{{ '/' | url }}">← Home</a></p>
@@ -42,7 +43,7 @@ templateClass: tmpl-post
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "headline": "{{ title }}",
   "image": [],
   "author": "{{ metadata.author.name }}",
@@ -55,8 +56,8 @@ templateClass: tmpl-post
       "url": "{{ '/img/favicon/favicon-192x192.png' | addHash }}"
     }
   },
-  "url": "{{ metadata.url }}{{ canonicalUrl or page.url }}",
-  "mainEntityOfPage": "{{ metadata.url }}{{ canonicalUrl or page.url }}",
+  "url": "{{ env.url }}{{ canonicalUrl or page.url }}",
+  "mainEntityOfPage": "{{ env.url }}{{ canonicalUrl or page.url }}",
   "datePublished": "{{ page.date | htmlDateString }}",
   "dateModified": "{{ page.inputPath | lastModifiedDate  | htmlDateString }}",
   "description": "{{ content | striptags | truncate(140) }}"

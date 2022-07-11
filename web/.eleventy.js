@@ -53,29 +53,32 @@ const execFile = promisify(require("child_process").execFile);
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginNavigation = require("@11ty/eleventy-navigation");
+const pluginSchema = require("@quasibit/eleventy-plugin-schema");
+const pluginTimeToRead = require("eleventy-plugin-time-to-read");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
 const localImages = require("eleventy-plugin-local-images");
 const CleanCSS = require("clean-css");
 const UglifyJS = require("uglify-js");
-const GA_ID = require("./data/metadata.json").googleAnalyticsId;
+const GA_ID = process.env.GOOGLE_ANALYTICS_ID;
 const { cspDevMiddleware } = require("./plugins/apply-csp.js");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
   eleventyConfig.addPlugin(pluginSyntaxHighlight);
   eleventyConfig.addPlugin(pluginNavigation);
+  eleventyConfig.addPlugin(pluginSchema);
+  eleventyConfig.addPlugin(pluginTimeToRead);
 
-  eleventyConfig.addPlugin(localImages, {
-    distPath: "_site",
-    assetPath: "/img/remote",
-    selector:
-      "img,amp-img,amp-video,meta[property='og:image'],meta[name='twitter:image'],amp-story",
-    verbose: false,
-  });
+  // eleventyConfig.addPlugin(localImages, {
+  //   distPath: "_site",
+  //   assetPath: "/img/remote",
+  //   selector:
+  //     "img,amp-img,amp-video,meta[property='og:image'],meta[name='twitter:image'],amp-story",
+  //   verbose: false,
+  // });
 
-  eleventyConfig.addPlugin(require("./plugins/img-dim.js"));
-  eleventyConfig.addPlugin(require("./plugins/json-ld.js"));
+  // eleventyConfig.addPlugin(require("./plugins/img-dim.js"));
   // eleventyConfig.addPlugin(require("./plugins/optimize-html.js"));
   // eleventyConfig.addPlugin(require("./plugins/apply-csp.js"));
   eleventyConfig.setDataDeepMerge(true);
@@ -202,8 +205,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("fonts");
   // styles and scripts are bundled by rollup into dist/
-  // We need to copy cached ga.js only if GA is used
-  eleventyConfig.addPassthroughCopy(GA_ID ? "dist" : "dist/*[!ga].*");
+  eleventyConfig.addPassthroughCopy("dist");
 
   eleventyConfig.setUseGitIgnore(false);
   // Rebuild on JS change to update the CSP, on CSS change to inline it.

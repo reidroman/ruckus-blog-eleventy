@@ -18,7 +18,7 @@ describe("check build output for a generic post", () => {
   describe("sample post", () => {
     const POST_PATH = "/posts/firstpost/";
     const POST_FILENAME = `_site${POST_PATH}index.html`;
-    const URL = metadata.url;
+    const URL = env.url;
     const POST_URL = URL + POST_PATH;
 
     if (!existsSync(POST_FILENAME)) {

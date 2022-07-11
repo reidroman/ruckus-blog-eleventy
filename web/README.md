@@ -33,11 +33,13 @@ TODO:
 [] check on `_headers`
 [] get a11y check, specifically for max contrast
 [] fix [tailwind imports](https://tailwindcss.com/docs/using-with-preprocessors)
+[] adhere to [font best practices](https://web.dev/font-best-practices/)
+[] figure out JSON-LD and [schema.org](https://schema.org/docs/gs.html)
+[] ensure consent and compliance with GA: https://analytics.google.com/analytics/web/#/a233779348p322165129/admin/datapolicies/datacollection
+[] probably replace local plugin img-dim with 11ty-maintained
+  [] deal with local ffmpeg install
 
 Features for consideration
-[] [https://github.com/surjithctly/neat-starter](https://github.com/surjithctly/neat-starter)
-  [] Alpine.js (maybe this is all the dynamism I need for instant nav)
-[] [https://github.com/reeseschultz/11r](https://github.com/reeseschultz/11r)
 [] [https://github.com/signalkuppe/eleventy-react](https://github.com/signalkuppe/eleventy-react)
 [] [https://htmx.org/](https://htmx.org/)
 [] [https://mdxjs.com/](https://mdxjs.com/)
@@ -57,6 +59,24 @@ Features for consideration
   [] Browsersync
   [] cache-busting strategies
 [] Enable [Tweet embeds in markdown](https://orbit.love/blog/how-to-add-twitter-and-instagram-embeds-on-an-eleventy-website-using-sanity)
+[] update [sanity icons](https://www.sanity.io/docs/icons-for-data-types) for doc types
+[] garbagetown experience getting first-party GA logging
+- https://analytics.google.com/analytics/web/#/a233779348p322165129/admin/streams/table/3823518178
+- https://ga-dev-tools.web.app/ga4/event-builder/
+- https://developers.google.com/tag-platform/tag-manager/server-side/send-data
+- https://www.simoahava.com/gtm-tips/send-google-analytics-requests-custom-endpoint/
+- https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide
+- https://jec.fyi/blog/setting-up-seo-and-google-analytics
+  [] either spend more hours with body from functions/ga.js
+  [] or find an earlier UA example (maybe functions/ga.bak.js)
+  [] debug local transport_url port stripping
+[] get noscript image trick working
+- https://www.analyticsmania.com/post/google-tag-manager-noscript/
+[] webvitals
+- https://www.searchenginejournal.com/technical-seo-core-web-vitals-guide/402501/
+- https://github.com/GoogleChrome/web-vitals
+- https://web.dev/vitals/
+  [] setup sample web vitals report: https://github.com/GoogleChromeLabs/web-vitals-report
 
 
 design vision:
@@ -76,3 +96,30 @@ eleventy templates and starters:
 - https://www.11ty.dev/docs/starter/
 - https://jamstackthemes.dev/ssg/eleventy/
 - https://www.easeout.co/blog/2021-01-28-50-best-eleventy-starter-themes-2021/
+
+all relevant schema.org typedefs:
+[] probably don't bother with the schema plugin, just use json-ld checker from high-performance
+[] maybe just use https://developers.google.com/search/docs/advanced/structured-data to autogenerate
+- https://www.maxivanov.io/add-structured-data-to-eleventy-blog/
+- https://github.com/quasibit/eleventy-plugin-schema
+- https://json-ld.org/playground/
+- https://www.jsonschemavalidator.net/
+https://schema.org/Blog
+https://schema.org/Article
+https://schema.org/HyperToc
+https://schema.org/HyperTocEntry
+https://schema.org/WebContent
+https://schema.org/WebPage
+https://schema.org/WebPageElement
+https://schema.org/WebSite
+https://schema.org/Corporation
+https://schema.org/Project
+https://schema.org/Code
+https://schema.org/WebApplication
+
+https://schema.org/ReactAction
+https://schema.org/LikeAction
+https://schema.org/ReviewAction
+https://schema.org/UseAction
+https://schema.org/AskAction
+https://schema.org/CommentAction

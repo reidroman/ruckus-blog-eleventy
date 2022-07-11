@@ -24,6 +24,7 @@
     "@11ty/eleventy-navigation": "^0.3.3",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-replace": "^4.0.0",
     "@sanity/block-content-to-markdown": "^0.0.5",
     "@sanity/client": "^3.3.2",
@@ -42,7 +43,6 @@
     "luxon": "^2.4.0",
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.6.4",
-    "node-fetch": "^3.2.6",
     "postcss": "^8.4.14",
     "postcss-cli": "^10.0.0",
     "postcss-import": "^14.1.0",
@@ -56,6 +56,7 @@
   },
   "dependencies": {
     "@ampproject/toolbox-optimizer": "^2.9.0",
+    "@quasibit/eleventy-plugin-schema": "^1.10.0",
     "alpinejs": "^3.10.2",
     "any-shell-escape": "^0.1.1",
     "autoprefixer": "^10.4.7",
@@ -63,6 +64,7 @@
     "csp-hash-generator": "^0.0.3",
     "csso": "^5.0.3",
     "datauri": "^4.1.0",
+    "eleventy-plugin-time-to-read": "^1.2.0",
     "expect.js": "^0.3.1",
     "ffmpeg-static": "^5.0.2",
     "form-data": "^4.0.0",
@@ -79,6 +81,7 @@
     "sharp": "^0.30.7",
     "touch": "^3.1.0",
     "twitter": "^1.7.1",
-    "uglify-js": "^3.16.1"
+    "uglify-js": "^3.16.1",
+    "web-vitals": "^2.1.4"
   }
 }

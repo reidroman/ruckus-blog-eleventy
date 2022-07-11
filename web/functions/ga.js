@@ -1,23 +1,16 @@
+// https://developers.google.com/analytics/devguides/collection/protocol/ga4/sending-events?client_type=gtag
+// https://github.com/codeniko/simple-tracker/blob/master/examples/server-examples/aws-lambda/google-analytics.js
+// NB: no great Google reference code because this circumvents a lot of tracker blockers
 const request = require("phin");
-const querystring = require("querystring");
 
-const GA_ENDPOINT = `https://www.google-analytics.com/collect`;
+const measurement_id = process.env.GOOGLE_ANALYTICS_ID;
+const api_secret = process.env.GOOGLE_ANALYTICS_MP_API_KEY;
+const DEV = process.env.NODE_ENV !== "production";
+const GA_URL = (DEV)
+  ? `https://www.google-analytics.com/debug/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`
+  : `https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}`;
 
-// Domains to allowlist. Replace with your own!
-const originallowlist = []; // keep this empty and append domains to allowlist using allowlistDomain()
-// Update me.
-allowlistDomain("eleventy-high-performance-blog-sample.industrialempathy.com/");
-
-function allowlistDomain(domain, addWww = true) {
-  const prefixes = ["https://", "http://"];
-  if (addWww) {
-    prefixes.push("https://www.");
-    prefixes.push("http://www.");
-  }
-  prefixes.forEach((prefix) => originallowlist.push(prefix + domain));
-}
-
-function cid(ip, otherStuff) {
+const cid = (ip, otherStuff) => {
   if (ip) {
     return require("crypto")
       .createHmac("sha256", ip + otherStuff + new Date().toLocaleDateString())
@@ -27,86 +20,53 @@ function cid(ip, otherStuff) {
   return Math.random() * 1000; // They use a decimal looking format. It really doesn't matter.
 }
 
-function proxyToGoogleAnalytics(event) {
+const proxyToGoogleAnalytics = async (event) => {
   // get GA params whether GET or POST request
-  const params =
-    event.httpMethod.toUpperCase() === "GET"
-      ? event.queryStringParameters
-      : querystring.parse(event.body);
+  const params = Object.fromEntries(
+    new URLSearchParams(
+      event.httpMethod.toUpperCase() === "GET" ? event.queryStringParameters : event.body
+    )
+  );
   const headers = event.headers || {};
 
+  // https://developers.google.com/analytics/devguides/collection/protocol/v1/parameters
   // attach other GA params, required for IP address since client doesn't have access to it. UA and CID can be sent from client
+  params.v = 1;
   params.uip = headers["x-forwarded-for"] || headers["x-bb-ip"] || ""; // ip override. Look into headers for clients IP address, as opposed to IP address of host running lambda function
   params.ua = params.ua || headers["user-agent"] || ""; // user agent override
-  params.cid = params.cid || cid(params.uip, params.ua);
+  params.ua = encodeURIComponent(params.ua);
+  params.client_id = params.cid || cid(params.uip, params.ua);
+  // params.events = [{ name: 'test_event', params: { quoi: 'que' } }];
+  // delete params.ua;
+  params.t = params.t || params['ep.event_action'];
 
-  const qs = querystring.stringify(params);
-  console.info("proxying params:", Object.keys(params).join(", "));
+  const { v, cid, tid, t, client_id } = params;
+  const data = new URLSearchParams({ v, cid, tid, t, client_id });
+  console.info("proxying params:", params);
+  console.info("params length:", Buffer.byteLength(data.toString(), "utf-8"));
 
-  const reqOptions = {
+  const res = await request({
+    url: GA_URL,
     method: "POST",
-    headers: {
-      "Content-Type": "image/gif",
-    },
-    url: GA_ENDPOINT,
-    data: qs,
-  };
-
-  request(reqOptions, (error, result) => {
-    if (error) {
-      console.info("googleanalytics error!", error);
-    } else {
-      if (result.statusCode == 200) {
-        return;
-      }
-      console.info(
-        "googleanalytics status code",
-        result.statusCode,
-        result.statusMessage
-      );
-    }
+    // latest conclusion here is that GA Measurement protocol parses for different versions
+    // based on whether you send it query-encoded or json
+    // but either way it's fucked
+    data: { client_id, events: [{ name: params['ep.event_action'], params: { value: params['ep.event_value'] } }] },
+    parse: "json",
   });
-}
 
-exports.handler = function (event, context, callback) {
-  const origin = event.headers["origin"] || event.headers["Origin"] || "";
-  console.log(`Received ${event.httpMethod} request from, origin: ${origin}`);
+  console.info("ga response", res.statusCode, res.statusMessage, JSON.stringify(res.body));
+};
 
-  const isOriginallowlisted = originallowlist.indexOf(origin) >= 0;
-  if (!isOriginallowlisted) {
-    console.info("Bad origin", origin);
+
+exports.handler = async (event, context) => {
+  try {
+    await proxyToGoogleAnalytics(event);
+  } catch (e) {
+    console.error("googleanalytics error!", e);
   }
-
-  let cacheControl = "no-store";
-  if (event.queryStringParameters["ec"] == "noscript") {
-    cacheControl = "max-age: 30";
-  }
-
-  const headers = {
-    //'Access-Control-Allow-Origin': '*', // allow all domains to POST. Use for localhost development only
-    "Access-Control-Allow-Origin": isOriginallowlisted
-      ? origin
-      : originallowlist[0],
-    "Cache-Control": cacheControl,
-  };
-
-  const done = () => {
-    callback(null, {
-      statusCode: 204,
-      headers,
-      body: "",
-    });
-  };
-
-  if (event.httpMethod === "OPTIONS") {
-    // CORS (required if you use a different subdomain to host this function, or a different domain entirely)
-    done();
-  } else if (isOriginallowlisted) {
-    // allow GET or POST, but only for allowlisted domains
-    done(); // Fire and forget
-    proxyToGoogleAnalytics(event);
-  } else {
-    callback("Not found");
+  return {
+    statusCode: 204,
   }
 };
 
@@ -130,8 +90,8 @@ sr: 1440x900
 vp: 945x777
 je: 0
 _u: blabla~
-jid: 
-gjid: 
+jid:
+gjid:
 cid: 1837873423.1522911810
 tid: UA-116530991-1
 _gid: 1828045325.1524815793
