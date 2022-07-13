@@ -25,7 +25,7 @@ const sizeOf = promisify(require("image-size"));
 const blurryPlaceholder = require("./blurry-placeholder");
 const srcset = require("./srcset");
 const path = require("path");
-const { gif2mp4 } = require("./video-gif");
+// const { gif2mp4 } = require("./video-gif");
 
 /**
  * Sets `width` and `height` on each image, adds blurry placeholder
@@ -63,25 +63,27 @@ const processImage = async (img, outputPath) => {
   if (inputType == "svg") {
     return;
   }
-  if (inputType == "gif") {
-    const videoSrc = await gif2mp4(src);
-    const video = img.ownerDocument.createElement(
-      /AMP/i.test(img.tagName) ? "amp-video" : "video"
-    );
-    [...img.attributes].map(({ name, value }) => {
-      video.setAttribute(name, value);
-    });
-    video.src = videoSrc;
-    video.setAttribute("autoplay", "");
-    video.setAttribute("muted", "");
-    video.setAttribute("loop", "");
-    if (!video.getAttribute("aria-label")) {
-      video.setAttribute("aria-label", img.getAttribute("alt"));
-      video.removeAttribute("alt");
-    }
-    img.parentElement.replaceChild(video, img);
-    return;
-  }
+  // NB: factoring this out because of local ffmpeg install
+  // plus I'm not sure bespoke in-repo processing is the way to go
+  // if (inputType == "gif") {
+  //   const videoSrc = await gif2mp4(src);
+  //   const video = img.ownerDocument.createElement(
+  //     /AMP/i.test(img.tagName) ? "amp-video" : "video"
+  //   );
+  //   [...img.attributes].map(({ name, value }) => {
+  //     video.setAttribute(name, value);
+  //   });
+  //   video.src = videoSrc;
+  //   video.setAttribute("autoplay", "");
+  //   video.setAttribute("muted", "");
+  //   video.setAttribute("loop", "");
+  //   if (!video.getAttribute("aria-label")) {
+  //     video.setAttribute("aria-label", img.getAttribute("alt"));
+  //     video.removeAttribute("alt");
+  //   }
+  //   img.parentElement.replaceChild(video, img);
+  //   return;
+  // }
   // When the input is a PNG, we keep the fallback image a PNG because JPEG does
   // not support transparency. However, we still optimize to AVIF/WEBP in a lossy
   // fashion. It may be worth adding a feature to opt-out of lossy optimization.

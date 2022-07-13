@@ -5,9 +5,9 @@
 </form> #}
 
 <div x-data="{ isSubscribeModalOpen: false }">
-  <button type="button" @click="isSubscribeModalOpen = !isSubscribeModalOpen">
+  <a href="#" @click.prevent="isSubscribeModalOpen = !isSubscribeModalOpen">
     Subscribe
-  </button>
+  </a>
 
   <!-- This example requires Tailwind CSS v2.0+ -->
   <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">

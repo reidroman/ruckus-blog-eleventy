@@ -90,7 +90,7 @@
     {# TODO: consider CDN #}
     <script src="{{ "/dist/alpine.js" }}" defer></script>
   </head>
-  <body class="w-full px-4 mx-auto prose">
+  <body class="w-full px-4 mx-auto prose h-screen	flex flex-col">
     <header class="border-b fixed w-full bg-white">
       <nav>
         <div id="nav">
@@ -114,7 +114,7 @@
       {% endif %}
     </header>
 
-    <main class="container mx-auto lg:max-w-4xl pt-32 {{ templateClass }}">
+    <main class="grow container mx-auto lg:max-w-4xl pt-32 {{ templateClass }}">
       <article>
         {% block article %}
           {{ content | safe }}
@@ -127,10 +127,17 @@
     </main>
 
     <footer>
-      {# TODO: link to social media or something useful #}
-      <a href="/about/">{{ metadata.author.name }}</a>
-      {% include "components/subscribe.njk" %}
+      <a href="https://twitter.com/RuckusFi" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://medium.com/@RuckusFi" target="_blank" rel="noopener">Medium</a>
+      <a href="https://www.linkedin.com/company/ruckusfi/" target="_blank" rel="noopener">LinkedIn</a>
+      {# <a href="https://discord.gg/xCvaWn7dPq" target="_blank" rel="noopener">Discord</a> #}
+      {# <a href="https://www.reddit.com/user/RuckusFi" target="_blank" rel="noopener">Reddit</a> #}
+      {# <a href="https://t.me/RuckusFi" target="_blank" rel="noopener">Telegram</a> #}
+      {# <a href="https://www.youtube.com/channel/UC5C18kmqKfDecCoEGvIllzA" target="_blank" rel="noopener">Youtube</a> #}
+      {# <a href="https://www.tiktok.com/@RuckusFi" target="_blank" rel="noopener">TikTok</a> #}
     </footer>
+    {% include "components/subscribe.njk" %}
+    {% include "components/toast.njk" %}
 
     <!-- Current page: {{ page.url | url }} -->
 

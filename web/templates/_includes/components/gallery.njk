@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 grid-flow-col gap-4">
+<div class="grid md:grid-cols-2 grid-flow-col gap-4">
 {% for post in postsList | reverse %}
   {% set currentPost = post.data.post %}
   <div class="{{ "row-span-2" if currentPost.isBig }}">

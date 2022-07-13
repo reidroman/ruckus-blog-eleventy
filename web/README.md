@@ -78,6 +78,8 @@ Features for consideration
 - https://web.dev/vitals/
   [] setup sample web vitals report: https://github.com/GoogleChromeLabs/web-vitals-report
 [] maybe don't build on netlify? seems weird that I can't set NODE_ENV to production on production (because it's building with dev deps)
+[] maybe don't watch and force eleventy rebuild on dist file change (since it won't affect html)
+[] make sure tweeting and search engines pick up a pretty preview
 
 
 design vision:

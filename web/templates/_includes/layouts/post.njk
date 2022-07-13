@@ -10,8 +10,6 @@ templateClass: tmpl-post
     <h2>{{ subtitle }}</h2>
 {% endblock %} #}
 
-{% set shareUrl = env.url + page.url %}
-
 {% block article %}
 <article>
   <h1>{{ post.title }}</h1>
@@ -27,12 +25,16 @@ templateClass: tmpl-post
   <p><a href="{{ '/' | url }}">← Home</a></p>
 </article>
 
-<h3>🙏🙏🙏</h3>
-<p>
-  Since you've made it this far, <a href="{{ shareUrl | safe }}" on-click="share">sharing</a> this article on your favorite social media network
-  would be highly appreciated 💖! For feedback, please
-  <a href="https://twitter.com/{{ metadata.author.twitterHandle }}" target="_blank" rel="noopener">ping me on Twitter.</a>
-</p>
+{# TODO: link to this specific article on social media #}
+<div>
+  <p>Article Links:</p>
+  <a href="#" target="_blank" rel="noopener">Clap on Medium</a>
+  <a href="#" target="_blank" rel="noopener">Retweet on Twitter</a>
+  <a href="#" target="_blank" rel="noopener">Share on LinkedIn</a>
+  {% set shareUrl = env.url + page.url %}
+  {# TODO: conditionally change to "Copy Link" if Share Menu not available #}
+  <a href="#" x-data @click.prevent="window.share('{{ shareUrl | safe }}')">Share Menu</a>
+</div>
 
 <share-widget>
   <button on-click="share" aria-label="Share" href="{{ shareUrl | safe }}">
