@@ -9,6 +9,10 @@ https://github.com/reeseschultz/11r
 Check their readmes for issues or config details
 
 TODO:
+[] steal design inspo
+  [] https://www.twosigma.com/
+  [] https://github.com/philhawksworth/hawksworx.com/tree/master/src/site
+  [] https://eleventyduo.netlify.app/
 [] reconcile json metadata with sanity provisions
 [] pull `mainImage` from sanity
 [] ensure draft posting, scheduled releases, tags, images, code snippets, code copying enabled through sanity
@@ -38,6 +42,7 @@ TODO:
 [] ensure consent and compliance with GA: https://analytics.google.com/analytics/web/#/a233779348p322165129/admin/datapolicies/datacollection
 [] probably replace local plugin img-dim with 11ty-maintained
   [] deal with local ffmpeg install
+[] add reader bar? https://www.npmjs.com/package/eleventy-plugin-reader-bar
 
 Features for consideration
 [] [https://github.com/signalkuppe/eleventy-react](https://github.com/signalkuppe/eleventy-react)
@@ -79,7 +84,8 @@ Features for consideration
   [] setup sample web vitals report: https://github.com/GoogleChromeLabs/web-vitals-report
 [] maybe don't build on netlify? seems weird that I can't set NODE_ENV to production on production (because it's building with dev deps)
 [] maybe don't watch and force eleventy rebuild on dist file change (since it won't affect html)
-[] make sure tweeting and search engines pick up a pretty preview
+[] make sure tweeting and search engines pick up a pretty preview (excerpt from Sanity)
+[] eventually change Sections in Posts to references inside the body, then fetch and inline them on generation
 
 
 design vision:

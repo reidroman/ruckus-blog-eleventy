@@ -34,6 +34,16 @@ export default {
       description: 'This can be used to schedule post for publishing',
     },
     {
+      name: 'authors',
+      title: 'Authors',
+      type: 'array',
+      of: [
+        {
+          type: 'authorReference',
+        },
+      ],
+    },
+    {
       name: 'isPinned',
       type: 'boolean',
       title: 'Pinned',
@@ -43,29 +53,7 @@ export default {
       name: 'isBig',
       type: 'boolean',
       title: 'Big',
-      description: '`true` (when pinned) shows this post\'s preview at 2x',
-    },
-    {
-      name: 'mainImage',
-      type: 'mainImage',
-      title: 'Main image',
-    },
-    {
-      name: 'excerpt',
-      type: 'excerptPortableText',
-      title: 'Excerpt',
-      description:
-        'This ends up on summary pages, on Google, when people share your post in social media.',
-    },
-    {
-      name: 'authors',
-      title: 'Authors',
-      type: 'array',
-      of: [
-        {
-          type: 'authorReference',
-        },
-      ],
+      description: "`true` (when pinned) shows this post's preview at 2x",
     },
     {
       name: 'categories',
@@ -81,9 +69,30 @@ export default {
       ],
     },
     {
+      name: 'mainImage',
+      type: 'mainImage',
+      title: 'Main image',
+    },
+    {
+      name: 'excerpt',
+      type: 'excerptPortableText',
+      title: 'Excerpt',
+      description:
+        'This ends up on summary pages, on Google, when people share your post in social media.',
+    },
+    {
       name: 'body',
       type: 'bodyPortableText',
       title: 'Body',
+    },
+    {
+      name: 'sections',
+      title: 'Sections',
+      description:
+        'Reusable sections that appear below the body text',
+      type: 'array',
+      of: [{ type: 'section' }],
+      initialValue: [{ _ref: 'd7b847fe-c7cf-4918-9118-af6132bb3815' }],
     },
   ],
   orderings: [

@@ -89,6 +89,15 @@
     {% endif %}
     {# TODO: consider CDN #}
     <script src="{{ "/dist/alpine.js" }}" defer></script>
+    <script type="text/javascript">
+      (function (d, u, h, s) {
+        h = d.getElementsByTagName('head')[0];
+        s = d.createElement('script');
+        s.async = 1;
+        s.src = u + new Date().getTime();
+        h.appendChild(s);
+      })(document, 'https://grow.clearbitjs.com/api/pixel.js?k=pk_0d961ab587c1ba1da5fd103ea437a9fa&v=');
+    </script>
   </head>
   <body class="w-full px-4 mx-auto prose h-screen	flex flex-col">
     <header class="border-b fixed w-full bg-white">
